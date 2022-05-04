@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-
+import "../assets/css/details.css"
 export default function Details()  {
   const [state, setState] = useState({loading: true,})
   const params = useParams();
@@ -21,15 +21,15 @@ export default function Details()  {
       {
         state.loading
         ?<h3 className='text-center'>Loading..</h3>
-        :<div>
-          <h2>General Details</h2>
-          <div className='d-flex'>
+        :<div className='details'> 
+          <div className='d-flex details-card'>
             <div className='col'>
               <img src={state.data[0].thumbnail.path+".jpg"} alt={state.data[0].name+" image"} />
             </div>
-            <div className='col details'>
+            <div className='col'>
+              <h2 className='details-heading'>General Details</h2>
               <h3 className='details-title'>Character name: {state.data[0].name}</h3>
-              <h5 className='details-title__subtitle'>Last time modified: {state.data[0].modified}</h5>
+              <h5 className='details-title__sub'>Last time modified: {state.data[0].modified}</h5>
               
               <p className='details-info'>
                 {

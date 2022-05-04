@@ -24,7 +24,7 @@ export default class CardsList extends Component {
         {
           this.state.loading 
           ?
-          <h2 style={{textAlign: "center", marginTop: "1.2rem"}}>please wait while loading..</h2>
+          <h3 style={{textAlign: "center", marginTop: "1.2rem"}}>please wait while loading..</h3>
           :
           this.state.data.map(obj=><Card key={obj.id} data={obj}/>)
         }
