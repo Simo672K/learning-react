@@ -15,7 +15,7 @@ export default class card extends Component {
           <p className="card-desc__body">
             {this.props.data.description !== ""? this.props.data.description: "No description given"}
           </p>
-          <Button>
+          <Button href={"details/"+this.props.data.id}>
             More details
           </Button>
         </div>

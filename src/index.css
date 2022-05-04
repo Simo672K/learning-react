@@ -117,6 +117,7 @@ body {
 }
 
 .btn{
+  text-decoration: none;
   display: block;
   padding: .6rem 1.3rem;
   width: fit-content;

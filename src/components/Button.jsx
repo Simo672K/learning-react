@@ -1,6 +1,8 @@
-function Button({children}) {
+import { Link } from "react-router-dom"
+
+function Button({children, href}) {
   return (
-    <button className="btn card-btn">{children}</button>
+    <Link to={href} className="btn card-btn">{children}</Link>
   )
 }
 export default Button
