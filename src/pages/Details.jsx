@@ -4,10 +4,10 @@ import "../assets/css/details.css"
 export default function Details()  {
   const [state, setState] = useState({loading: true,})
   const params = useParams();
+  const url = `https://gateway.marvel.com:443/v1/public/characters/${params.id}?ts=0faE4&apikey=5538f0b6e1c38cc40dc93eaa8d1c5bd6&hash=643de5ac439f46275d14b14e07141625`;
 
   useEffect(function(){
-    const characterId = params.id;
-    fetch(`https://gateway.marvel.com:443/v1/public/characters/${characterId}?ts=0faE4&apikey=5538f0b6e1c38cc40dc93eaa8d1c5bd6&hash=643de5ac439f46275d14b14e07141625`)
+    fetch(url)
     .then((data) => data.json())
     .then((res) => {
       setState({ loading: false, data: res.data.results });
@@ -16,8 +16,7 @@ export default function Details()  {
   
   
   return (
-    <div className="app-container">
-      <h1 className="app-title text-center">Marvel characters!</h1>
+    <>
       {
         state.loading
         ?<h3 className='text-center'>Loading..</h3>
@@ -42,7 +41,8 @@ export default function Details()  {
           </div>
         </div>
       }
-    </div>
+    </>
+
   )
   
 }
