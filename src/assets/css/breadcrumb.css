@@ -1,0 +1,25 @@
+.breadcrumb{
+  width: 100%;
+  background-color: #fff;
+  padding: .8rem;
+  box-shadow: var(--shadow-2);
+}
+
+.breadcrumb-nav{
+  list-style: none;
+  display: flex;
+}
+
+.breadcrumb-item{
+  margin-left: .5rem;
+  color: #6e6e6e;
+}
+
+.breadcrumb-item:not(:last-of-type)::after{
+  content: "/";
+  margin-left: .5rem;
+}
+
+.breadcrumb-item a{
+  color: var(--link);
+}

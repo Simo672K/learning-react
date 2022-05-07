@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import "../assets/css/details.css"
+import BreadCrumb from '../components/BreadCrumb';
 import AppContext from '../context/context';
 
 export default function Details()  {
@@ -25,6 +26,8 @@ export default function Details()  {
         character.loading
         ?<h4>Please wait...</h4>
         :
+        <>
+        <BreadCrumb active={character.data.name} />
         <div className='d-flex details-card'>
           <div className='col'>
             <img src={character.data.thumbnail.path+".jpg"} alt={character.data.name+" image"} />
@@ -43,6 +46,7 @@ export default function Details()  {
             </p>
           </div>
         </div>
+        </>
       }    
     </div>
   )
