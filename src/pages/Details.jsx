@@ -11,12 +11,14 @@ export default function Details()  {
   useEffect(function(){
     if(!context.loading){
       const {loading, data} = context;
-      setCharacter({data});
+      data.filter(obj=>{
+        if(obj.id === parseInt(params.id)){
+          setCharacter(prev=> {return { loading ,data:obj}});
+        }
+      })
     }
-    console.log(character)
   }, [context])
 
-  console.log(character)
   return (
     <div className='details'> 
       {
@@ -24,22 +26,22 @@ export default function Details()  {
         ?<h4>Please wait...</h4>
         :
         <div className='d-flex details-card'>
-            <div className='col'>
-              <img src={character[0].thumbnail.path+".jpg"} alt={character[0].name+" image"} />
-            </div>
-            <div className='col'>
-              <h2 className='details-heading'>General Details</h2>
-              <h3 className='details-title'>Character name: {character[0].name}</h3>
-              <h5 className='details-title__sub'>Last time modified: {character[0].modified}</h5>
-              
-              <p className='details-info'>
-                {
-                  character[0].description !== ""
-                  ? character[0].description
-                  : "There is no details yet"
-                }
-              </p>
-            </div>
+          <div className='col'>
+            <img src={character.data.thumbnail.path+".jpg"} alt={character.data.name+" image"} />
+          </div>
+          <div className='col'>
+            <h2 className='details-heading'>General Details</h2>
+            <h3 className='details-title'>Character name: {character.data.name}</h3>
+            <h5 className='details-title__sub'>Last time modified: {character.data.modified}</h5>
+            
+            <p className='details-info'>
+              {
+                character.data.description !== ""
+                ? character.data.description
+                : "There is no details yet"
+              }
+            </p>
+          </div>
         </div>
       }    
     </div>

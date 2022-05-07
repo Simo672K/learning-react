@@ -1,34 +1,30 @@
-import React, { Component } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
+import AppContext from '../context/context';
 import Card from "./Card";
 
-export default class CardsList extends Component {
-    constructor() {
-    super();
-    this.state = {
-      loading: true,
-    };
-  }
+export default function CardsList() {
+  const context  = useContext(AppContext);
+  const [characters, setCharacters] = useState({loading: true});
 
-  componentDidMount() {
-    fetch(
-      "https://gateway.marvel.com:443/v1/public/characters?limit=90&ts=0faE4&apikey=5538f0b6e1c38cc40dc93eaa8d1c5bd6&hash=643de5ac439f46275d14b14e07141625"
-    )
-      .then((data) => data.json())
-      .then((res) => {
-        this.setState({ loading: false, data: res.data.results });
-      });
-  }
-  render() {
-    return (
-      <div className="cards-grid">     
-        {
-          this.state.loading 
-          ?
-          <h3 style={{textAlign: "center", marginTop: "1.2rem"}}>please wait while loading..</h3>
-          :
-          this.state.data.map(obj=><Card key={obj.id} data={obj}/>)
-        }
-      </div>
-    )
-  }
+   useEffect(function(){
+    if(!context.loading){
+      const {loading, data} = context;
+      setCharacters(prev=> {
+        return { loading, data }
+      })
+    }
+  }, [context])
+
+  return (
+    <div className="cards-grid">     
+      {
+        characters.loading 
+        ?
+        <h3 style={{textAlign: "center", marginTop: "1.2rem"}}>please wait while loading..</h3>
+        :
+        characters.data.map(obj=><Card key={obj.id} data={obj}/>)
+      }
+    </div>
+  )
+
 }
