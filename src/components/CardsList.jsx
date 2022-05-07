@@ -1,19 +1,7 @@
-import React, { useEffect, useContext, useState } from 'react'
-import AppContext from '../context/context';
+import React from 'react'
 import Card from "./Card";
 
-export default function CardsList() {
-  const context  = useContext(AppContext);
-  const [characters, setCharacters] = useState({loading: true});
-
-   useEffect(function(){
-    if(!context.loading){
-      const {loading, data} = context;
-      setCharacters(prev=> {
-        return { loading, data }
-      })
-    }
-  }, [context])
+export default function CardsList({characters}) {
 
   return (
     <div className="cards-grid">     
