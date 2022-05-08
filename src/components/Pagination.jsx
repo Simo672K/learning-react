@@ -1,18 +1,12 @@
-import {useState, useEffect} from "react"
+import { useState } from "react";
 import "../assets/css/pagination.css"
 
-function Pagination() {
-  const [pageState, setPageState] = useState({num: 5, active: 1})
-  const [pagesNumber, setPagesNumber] = useState([...Array(4).keys()]);
-
-  useEffect(function(){
-    setPagesNumber([...Array(pageState.num).keys()])
-  }, [pageState])
-
+function Pagination({pages, setPages}) {
+  
   const setActiveLink = (id) =>{
-    setPageState(prev=> {
-      const {num} = prev;
-      return {num, active: id}
+    setPages(prev=> {
+      const { pageNum } = prev;
+      return { pageNum, active: id }
     })
   }
 
@@ -23,9 +17,11 @@ function Pagination() {
           <button className="pagination-link pagination-arrow arrow-left"></button>
         </li>
         {
-          pagesNumber.map(pageNum =>
-            <li key={pageNum+1} className="pagination-item">
-              <button onClick={e =>setActiveLink(pageNum+1)} className={`pagination-link ${ pageNum+1 === pageState.active? "active": ""}`}>{pageNum+1}</button>
+          [...Array(pages.pageNum).keys()].map(num =>
+            <li key={num+1} className="pagination-item">
+              <button onClick={e =>setActiveLink(num+1)} className={`pagination-link ${ num+1 === pages.active? "active": ""}`}>
+                {num+1}
+              </button>
             </li>
           )
         }

@@ -2,23 +2,32 @@ import React, { useContext, useState, useEffect } from "react";
 import Pagination from "../components/Pagination";
 import CardsList from "../components/CardsList";
 import AppContext from "../context/context";
+import { setPageContent } from "../functions/pagination";
+import Spinner from "../components/Spinner";
 
 function HomePage () {
-   const context  = useContext(AppContext);
+  const context  = useContext(AppContext);
   const [characters, setCharacters] = useState({loading: true});
+  const [pages, setPages] = useState({pageNum: 3, active: 1})
 
    useEffect(function(){
-    if(!context.loading){
+     if(!context.loading){
+      const maxPageContent = 15;
       const {loading, data} = context;
       setCharacters(prev=> {
         return { loading, data }
       })
+      setPages(prev=>{ return {...prev,pageNum: setPageContent(maxPageContent, data.length)}})      
     }
   }, [context])
-  return (
+  return (          
+    characters.loading
+    ?
+    <Spinner/>
+    :
     <>
       <CardsList characters={characters} />
-      <Pagination/>
+      <Pagination pages={pages} setPages={setPages} />
     </>
   );
 }
