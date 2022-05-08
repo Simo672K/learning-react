@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import "../assets/css/details.css"
 import BreadCrumb from '../components/BreadCrumb';
+import Spinner from '../components/Spinner';
 import AppContext from '../context/context';
 
 export default function Details()  {
@@ -24,7 +25,7 @@ export default function Details()  {
     <div className='details'> 
       {
         character.loading
-        ?<h4>Please wait...</h4>
+        ?<Spinner/>
         :
         <>
         <BreadCrumb active={character.data.name} />
